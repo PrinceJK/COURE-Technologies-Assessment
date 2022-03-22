@@ -6,8 +6,10 @@ namespace Algothm_Challenge
     {
         static void Main(string[] args)
         {
-            var intArray = new int[5]{ 1, 2, 3, 4, 5 };
-            var soln = SortArray(intArray);
+            var intArray1 = new int[5]{ 1, 2, 3, 4, 5 };
+            var intArray2 = new int[3]{ 15, 25, 35 };
+            var intArray3 = new int[2]{ 8,8 };
+            var soln = SortArray(intArray3);
             Console.WriteLine(soln);
         }
 
@@ -23,8 +25,7 @@ namespace Algothm_Challenge
             {
                 if (number == 8)
                 {
-                    result += 5;
-                    continue;
+                    result += 6;
                 }
                 else if (number % 2 == 0)
                 {
