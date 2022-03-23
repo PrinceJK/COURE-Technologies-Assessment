@@ -1,4 +1,4 @@
-﻿using API_Challenge.Data.Models;
+﻿using API_Challenge.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace API_Challenge.Data
@@ -7,7 +7,7 @@ namespace API_Challenge.Data
     {
         public ApiContext(DbContextOptions<ApiContext> options) : base(options) { }
 
-        public DbSet<Country> Countries {get; set;}
+        public DbSet<Country> Countries { get; set; }
         public DbSet<CountryDetail> CountryDetails { get; set; }
 
     }

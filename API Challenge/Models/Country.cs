@@ -1,4 +1,6 @@
-﻿namespace API_Challenge.Data.Models
+﻿using System.Collections.Generic;
+
+namespace API_Challenge.Models
 {
     public class Country
     {
@@ -6,6 +8,6 @@
         public string CountryCode { get; set; }
         public string Name { get; set; }
         public string CountryIso { get; set; }
-        public CountryDetail CountryDetail { get; set; }
+        public ICollection<CountryDetail> CountryDetails { get; set; }
     }
 }
