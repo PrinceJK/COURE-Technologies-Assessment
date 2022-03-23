@@ -23,12 +23,12 @@ namespace Algothm_Challenge
             var result = 0;
             foreach (var number in arr)
             {
-                if (number == 8)
+                if (number % 2 == 0)
                 {
-                    result += 6;
-                }
-                else if (number % 2 == 0)
-                {
+                    if (number == 8)
+                    {
+                        result += 5;
+                    }
                     result += 1;
                 }
                 else if (number % 2 == 1)
