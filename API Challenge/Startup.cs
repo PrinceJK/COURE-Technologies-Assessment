@@ -43,6 +43,8 @@ namespace API_Challenge
 
             app.UseHttpsRedirection();
 
+            ApiSeeder.SeedData(app).Wait();
+
             app.UseRouting();
 
             app.UseAuthorization();

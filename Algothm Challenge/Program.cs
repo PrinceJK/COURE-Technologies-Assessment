@@ -9,11 +9,11 @@ namespace Algothm_Challenge
             var intArray1 = new int[5]{ 1, 2, 3, 4, 5 };
             var intArray2 = new int[3]{ 15, 25, 35 };
             var intArray3 = new int[2]{ 8,8 };
-            var soln = SortArray(intArray3);
-            Console.WriteLine(soln);
+            var solution = Solution(intArray3);
+            Console.WriteLine(solution);
         }
 
-        static int SortArray(int[] arr)
+        static int Solution(int[] arr)
         {
             if (arr.Length == 0)
             {
