@@ -20,7 +20,7 @@ namespace API_Challenge.Repository.Implementation
         }
         public async Task<Country> GetCountryByNumber(string phoneNumber)
         {
-            var countryIso = new int[3] {0,0,0 };
+            var countryIso = new char[3] {'0', '0','0' };
             for (int i = 0; i < phoneNumber.Length; i++)
             {
                 if (i == 3)
@@ -33,9 +33,10 @@ namespace API_Challenge.Repository.Implementation
                 
             }
 
-            var cs =string.Join("", from i in countryIso select i.ToString());
+            //var cs =string.Join("", from i in countryIso select i.ToString());
+            var cs = new string(countryIso);
 
-            var country = await _dbSet.Where(c => c.CountryIso == cs).Include(c => c.CountryDetails)
+            var country = await _dbSet.Where(c => c.CountryCode == cs).Include(c => c.CountryDetails)
                 .FirstOrDefaultAsync();
             return country;
         }
