@@ -1,10 +1,9 @@
-﻿using System.Linq;
-using System.Runtime.CompilerServices;
+﻿using API_Challenge.Data;
 using API_Challenge.Models;
 using API_Challenge.Repository.Interface;
-using System.Threading.Tasks;
-using API_Challenge.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace API_Challenge.Repository.Implementation
 {
@@ -20,8 +19,8 @@ namespace API_Challenge.Repository.Implementation
         }
         public async Task<Country> GetCountryByNumber(string phoneNumber)
         {
-            var countryIso = new char[3] {'0', '0','0' };
-            for (int i = 0; i < phoneNumber.Length; i++)
+            var countryIso = new char[3] { '0', '0', '0' };
+            for (var i = 0; i < phoneNumber.Length; i++)
             {
                 if (i == 3)
                 {
@@ -30,13 +29,12 @@ namespace API_Challenge.Repository.Implementation
 
                 countryIso[i] = phoneNumber[i];
                 continue;
-                
+
             }
 
-            //var cs =string.Join("", from i in countryIso select i.ToString());
-            var cs = new string(countryIso);
+            var countryIsoToString = new string(countryIso);
 
-            var country = await _dbSet.Where(c => c.CountryCode == cs).Include(c => c.CountryDetails)
+            var country = await _dbSet.Where(c => c.CountryCode == countryIsoToString).Include(c => c.CountryDetails)
                 .FirstOrDefaultAsync();
             return country;
         }
