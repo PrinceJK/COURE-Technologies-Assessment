@@ -1,7 +1,10 @@
 ﻿using API_Challenge.Data;
 using API_Challenge.Models;
+using API_Challenge.Models.DTOs;
 using API_Challenge.Repository.Interface;
+using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,32 +14,43 @@ namespace API_Challenge.Repository.Implementation
     {
         private readonly ApiContext _context;
         private readonly DbSet<Country> _dbSet;
+        private readonly IMapper _mapper;
 
-        public CountryRepository(ApiContext context)
+        public CountryRepository(ApiContext context, IMapper mapper)
         {
             _context = context;
             _dbSet = _context.Set<Country>();
+            _mapper = mapper;
         }
-        public async Task<Country> GetCountryByNumber(string phoneNumber)
+        public async Task<Response> GetCountryByNumber(string number)
         {
-            var countryIso = new char[3] { '0', '0', '0' };
-            for (var i = 0; i < phoneNumber.Length; i++)
+            var response = new Response();
+            var countryIso = new List<char>();
+            for (var i = 0; i < number.Length; i++)
             {
                 if (i == 3)
                 {
                     break;
                 }
-
-                countryIso[i] = phoneNumber[i];
+                countryIso.Add(number[i]);
                 continue;
-
             }
 
-            var countryIsoToString = new string(countryIso);
-
-            var country = await _dbSet.Where(c => c.CountryCode == countryIsoToString).Include(c => c.CountryDetails)
+            var countryIsoToString = new string(countryIso.ToArray());
+            var country = await _dbSet.Where(c => c.CountryCode == countryIsoToString)
+                .Include(c => c.CountryDetails)
                 .FirstOrDefaultAsync();
-            return country;
+            if (country == null)
+            {
+                response.Number = number;
+                response.Country = null;
+                return response;
+            }
+
+            var countryDto = _mapper.Map<CountryDTO>(country);
+            response.Number = number;
+            response.Country = countryDto;
+            return response;
         }
     }
 }

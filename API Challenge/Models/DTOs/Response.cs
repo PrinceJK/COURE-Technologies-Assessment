@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace API_Challenge.Models.DTOs
+﻿namespace API_Challenge.Models.DTOs
 {
-    public class Response<T>
+    public class Response
     {
-        public T Parameter { get; set; }
-        public T Data { get; set; }
+        public string Number { get; set; }
+        public CountryDTO Country { get; set; }
 
     }
 }

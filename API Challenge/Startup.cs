@@ -1,3 +1,4 @@
+using API_Challenge.AutoMapper;
 using API_Challenge.Data;
 using API_Challenge.Repository.Implementation;
 using API_Challenge.Repository.Interface;
@@ -33,6 +34,7 @@ namespace API_Challenge
             });
 
             services.AddScoped<ICountryRepository, CountryRepository>();
+            services.AddAutoMapper(typeof(MapInitializer));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.1

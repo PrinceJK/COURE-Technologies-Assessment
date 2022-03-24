@@ -17,9 +17,9 @@ namespace API_Challenge.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(string phneNum)
+        public async Task<IActionResult> Get(string number)
         {
-            var response = await _countryRepository.GetCountryByNumber(phneNum);
+            var response = await _countryRepository.GetCountryByNumber(number);
             return StatusCode((int)HttpStatusCode.OK, response);
         }
     }
